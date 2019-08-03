@@ -17,3 +17,12 @@ Kod yazarken Python Pep8 kurallarına uymak zorunludur. Bu sadece Python dilinde
 
 ### Gerekli Yüklemeler
 Bu repo üzerinde düzgün çalışabilmeniz için gerekli olan tüm yüklemeler requirements.md dosyası içerisinde bulunmaktadır. Proje üzerinde çalışmaya başlamadan önce bu yüklemelerin gerçekleşmiş olduğundan emin olmalısınız.
+
+### Güncellenmesi Gereken Şeyler
+- Sorun 1: Application.py dosyasında "take_a_photo()" fonksiyonu resim çekmek için kullanılıyor. Resim çekildiği zaman default renk bilgisi siyah beyaz olduğu için resim renklendirme işlemini "cv.merge([r, g, b])" fonksiyonuyla gerçekleştiriyoruz ancak bu fonksiyon resmi ağırlıklı olarak mavi tonda gösteriyor. Bunun düzeltilip resmin orjinal tonlarında olması sağlanmalıdır. OpenCV'de çekilen resmin renklendirilmesiyle ilgili konular araştırılabilir.
+
+- Sorun 2: Application.py dosyasında "take_a_photo()" fonksiyonu resim çekmek için kullanılıyor. Çektiği resmi bir dosya olarak bir dizine kaydediyor ve resim çekilebişmişse True, çekilememişse False değerini döndürüyor. Resmi çektiğinde resmi bir dizine kaydetmek yerine direkt resim objesi olarak döndürecek şekilde güncellenmeli. Yani resim çekilmişse resim objesi, resim çekilememişse None değerini döndürecek şekle getirilmeli. OpenCV'nin kullandığı resim objesinin Google'nin kullandığı "PIL" kütüphanesinin resim objesine dönüştürme işlemleri araştırılabilir.
+
+- Sorun 3: Application.py dosyasında "make_text_analysis()" fonksiyonu resimdeki yazıların çıkarımının yapılabilmesi için kullanılır. Resimden çıkarımı yapılan yazılar bir listeye(list_of_findings) eklenir. Ancak listeye eklenen yazılar sorunludur. Yazılarda gereksiz noktalama işaretleri bulunabilmektedir ve aynı yazılar birden fazla kere tekrar etmektedir. Bu sorunun düzeltilmesi gerekiyor. Yazıların temizlenip, düzeltilip düzgünce seslendirilebilmesi sağlanmalıdır.
+
+- Sorun 4: Application.py dosyasında "display_the_speech()" fonksiyonu seslendirilip .mp3 dosyası olarak kaydedilen bulguların default media oynatıcısında çalınmasını sağlar. Yani bir nevi .mp3 dosyasını bilgisayarda dinlemek gibi düşünülebilir. Bunu daha etkili bir yoldan halletmek gerekiyor. Her ses çalınacağı zaman sistemin default mp3 playerinin çalışması yerine direkt Python ses çalma-yürütme kütüphaneleriyle yapılması daha iyi olacaktır.
